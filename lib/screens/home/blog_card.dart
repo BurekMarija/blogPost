@@ -15,15 +15,14 @@ class BlogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var diff=post.id;
     return Card(
+      color: Colors.white.withOpacity(0),
       margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
       child:
           Container(
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              border: Border.all(width: 2, 
-              color: Colors.blue),
-              borderRadius: BorderRadius.all(Radius.circular(20))
+            decoration:BoxDecoration(
+                color: Colors.white.withOpacity(0.7)
             ),
+            padding: const EdgeInsets.all(16.0),
             child:
           Row(
             children: <Widget>[
