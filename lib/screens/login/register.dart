@@ -24,7 +24,11 @@ class _RegisterState extends State<Register> {
       ),
 
         actions: <Widget>[
-          FloatingActionButton.extended(onPressed: (){widget.toggle();}, icon: Icon(Icons.people), label: Text("Sign in"), )
+          FloatingActionButton.extended(
+            onPressed: (){widget.toggle();},
+            icon: Icon(Icons.people),
+            label: Text("Sign in"),
+          backgroundColor: Colors.transparent,)
         ],),
       resizeToAvoidBottomInset: false,
       body:
@@ -94,7 +98,7 @@ class _RegisterState extends State<Register> {
                     }
                   },
                     child:Text("Register", style: TextStyle(color: Colors.white),),
-                    style: TextButton.styleFrom(side: BorderSide(width: 2), backgroundColor: Colors.lightBlue,),
+                    style: TextButton.styleFrom( backgroundColor: Colors.lightBlue,),
                   ),
 
                   SizedBox(height: 10,),

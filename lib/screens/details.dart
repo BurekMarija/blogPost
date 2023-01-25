@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../shared/constants.dart';
+
 class PostDetails extends StatelessWidget {
   final  inputName;
   final  inputContent;
@@ -10,30 +12,36 @@ class PostDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text("Post: "+ inputName)),
       body:
-          Center(child:
-          Column(
-            children: [
-              Padding(padding: EdgeInsets.only(top:20),
-              child:Image.network(inputUrl,
-                width: 200,), ),
-              Padding(padding: EdgeInsets.all(20),
-                child:Text(inputName,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 26.0,
-                      color: Colors.blue
-                  ) ,
-                ), ),
-              Padding(padding: EdgeInsets.all(10),
+          Container(
+            padding: EdgeInsets.all(20),
+            height: MediaQuery.of(context).size.height,
+            decoration: backgroundGradient,
+            child: Center(
               child:
-              Text(inputContent,
-                style: TextStyle(
-                    fontSize: 18.0,
-                    color: Colors.black
-                ) ,),),
+            Column(
+              children: [
+                Padding(padding: EdgeInsets.only(top:20),
+                child:Image.network(inputUrl,
+                  width: 200,), ),
+                Padding(padding: EdgeInsets.all(20),
+                  child:Text(inputName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 26.0,
+                        color: Colors.white
+                    ) ,
+                  ), ),
+                Padding(padding: EdgeInsets.all(10),
+                child:
+                Text(inputContent,
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      color: Colors.black
+                  ) ,),),
 
-            ],
-          ),)
+              ],
+            ),),
+          )
 
     );
   }

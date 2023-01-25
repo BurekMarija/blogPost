@@ -19,8 +19,6 @@ import "package:blog_posts/models/user.dart";
        try{
          fireUser.UserCredential result= await _log.signInAnonymously();
          var user= result.user;
-         print(user);
-         print(result.user?.uid);
          return _firebaseUser(user);
        }
        catch(e){

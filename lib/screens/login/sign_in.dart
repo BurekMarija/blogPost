@@ -28,7 +28,11 @@ class _SignInState extends State<SignIn> {
     Scaffold(
       appBar: AppBar(title: Text("Sign in"),
       actions: <Widget>[
-        FloatingActionButton.extended(onPressed: (){widget.toggle();}, icon: Icon(Icons.people), label: Text("Register"), )
+        FloatingActionButton.extended(
+          onPressed: (){widget.toggle();},
+          icon: Icon(Icons.people),
+          label: Text("Register"),
+        backgroundColor: Colors.transparent,)
       ],
       ),
       resizeToAvoidBottomInset: false,
@@ -97,7 +101,7 @@ class _SignInState extends State<SignIn> {
                   }
                   },
                     child:Text("Sign in", style: TextStyle(color: Colors.white),),
-                    style: TextButton.styleFrom(side: BorderSide(width: 2), backgroundColor: Colors.lightBlue,),),
+                    style: TextButton.styleFrom( backgroundColor: Colors.lightBlue,),),
                   SizedBox(height: 10,),
                   Text(error,
                     style: TextStyle(color: Colors.red,

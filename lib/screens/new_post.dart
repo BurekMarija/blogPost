@@ -3,9 +3,7 @@ import 'package:blog_posts/screens/home/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import "package:get/get.dart";
-
 import '../shared/constants.dart';
-
 
 class NewScreen extends StatelessWidget {
   final controlerName=TextEditingController();
@@ -105,8 +103,13 @@ class NewScreen extends StatelessWidget {
                         minLines: 1,
                       ),),
                       TextButton(onPressed: (){ createPost();
+                      Get.to(()=>Home());
                       },
-                          child: Text("Unesi")),],
+                          child: Text("Unesi",
+                          style: TextStyle(fontSize: 20,
+                          color: Colors.white),),
+                      ),
+                    ],
                   ),),
               ) ,),
             )

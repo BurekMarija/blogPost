@@ -96,7 +96,11 @@ class EditScreen extends StatelessWidget {
                       TextButton(onPressed:()async{
                         await editPost();
                       },
-                          child: Text("Edit post")),],
+                          child: Text("Edit post",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white
+                          ),)),],
                   ),
                 ),
             ),
