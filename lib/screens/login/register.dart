@@ -1,7 +1,11 @@
+import 'package:blog_posts/redux/Login_redux/login_actions.dart';
 import 'package:blog_posts/shared/loading.dart';
 import 'package:flutter/material.dart';
+import '../../redux/Login_redux/login_state.dart';
+import '../../redux/Login_redux/reducer.dart';
 import '../../services/log.dart';
 import '../../shared/constants.dart';
+import 'package:redux/redux.dart';
 
 class Register extends StatefulWidget {
 final Function toggle;
@@ -11,7 +15,11 @@ Register({required this.toggle});
 }
 
 class _RegisterState extends State<Register> {
-  final LoginService _log= LoginService();
+  final loginStore = Store<LoginState>(
+    loginReducer,
+    initialState: LoginState(uid: ''),
+  );
+  //final LoginService _log= LoginService();
   bool loading=false;
   final _regkey=GlobalKey<FormState>();
   String email="";
@@ -85,7 +93,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(height: 20,),
                   TextButton(onPressed: ()async{
                     if(_regkey.currentState!.validate()){
-                      setState(() {
+                    /*  setState(() {
                         loading=true;
                       });
                       dynamic result= await _log.register(email, password);
@@ -94,7 +102,9 @@ class _RegisterState extends State<Register> {
                           loading=false;
                           error="Please get right email";
                         });
-                      }
+                      }*/
+                      var user=loginStore.dispatch(RegisterUser(email:email, password:password));
+
                     }
                   },
                     child:Text("Register", style: TextStyle(color: Colors.white),),

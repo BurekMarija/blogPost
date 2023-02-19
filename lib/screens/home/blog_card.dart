@@ -16,25 +16,25 @@ class BlogCard extends StatelessWidget {
     var diff=post.id;
     return Card(
       color: Colors.white.withOpacity(0),
-      margin: EdgeInsets.fromLTRB(15, 5, 15, 5),
+      margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
       child:
           Container(
             decoration:BoxDecoration(
                 color: Colors.white.withOpacity(0.7)
             ),
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(12.0),
             child:
           Row(
             children: <Widget>[
               //Image.network(post.url.toString(),
               // width: 100,
               //height: 100,),
-              Padding(padding: EdgeInsets.only(left: 10), child:
+              Padding(padding: EdgeInsets.only(left: 5), child:
               Column(
                 children: <Widget>[
                   Padding(padding: EdgeInsets.all(5), child:
                   Container(
-                    width: 150,
+                    width: MediaQuery.of(context).size.width*0.3,
                     child: Text(
                       post.name.toString(),
                       textAlign: TextAlign.center,

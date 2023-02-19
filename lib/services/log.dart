@@ -2,7 +2,7 @@ import "package:firebase_auth/firebase_auth.dart" as fireUser;
 import "package:blog_posts/models/user.dart";
 
 //Login user anonimno
-   class  LoginService{
+   /*class  LoginService{
      final fireUser.FirebaseAuth _log=fireUser.FirebaseAuth.instance;
      User? _firebaseUser(user){
         return user != null? User(uid: user.uid) : null;
@@ -12,10 +12,10 @@ import "package:blog_posts/models/user.dart";
        return _log.authStateChanges()
            .map((user) => _firebaseUser(user));
 
-     }
+     }*/
 
      //Login anonimno
-     Future logInAnon() async{
+  /*   Future logInAnon() async{
        try{
          fireUser.UserCredential result= await _log.signInAnonymously();
          var user= result.user;
@@ -25,10 +25,10 @@ import "package:blog_posts/models/user.dart";
          print(e.toString() + "jos nekej");
          return null;
        }
-     }
+     }*/
 
      //Sign out
-   Future signOut() async {
+ /*  Future signOut() async {
      try{
       return await _log.signOut();
      }
@@ -36,10 +36,10 @@ import "package:blog_posts/models/user.dart";
        print(e.toString());
        return null;
      }
-   }
+   }*/
 
    //Registracija
-   Future register(String email, String password) async{
+  /* Future register(String email, String password) async{
      try{
       var result= await _log.createUserWithEmailAndPassword(email: email, password: password);
      var user=result.user;
@@ -49,9 +49,9 @@ import "package:blog_posts/models/user.dart";
        print(e.toString());
        return null;
      }
-   }
+   }*/
 //Sign in
-     Future signIn(String email, String password) async{
+  /*   Future signIn(String email, String password) async{
        try{
          var result= await _log.signInWithEmailAndPassword(email: email, password: password);
          var user=result.user;
@@ -63,4 +63,4 @@ import "package:blog_posts/models/user.dart";
        }
      }
 
-   }
+   }*/

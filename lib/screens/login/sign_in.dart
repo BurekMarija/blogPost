@@ -1,9 +1,17 @@
+import 'package:blog_posts/redux/Login_redux/reducer.dart';
 import 'package:blog_posts/screens/login/register.dart';
 import 'package:blog_posts/services/log.dart';
 import 'package:blog_posts/shared/loading.dart';
 import "package:flutter/material.dart";
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:redux/redux.dart';
 
+import '../../models/user.dart';
+import '../../redux/Login_redux/login_actions.dart';
+import '../../redux/Login_redux/login_state.dart';
 import '../../shared/constants.dart';
+import '../home/home.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -14,7 +22,11 @@ class SignIn extends StatefulWidget {
 }
 //Ulogiravanje anonimno
 class _SignInState extends State<SignIn> {
-  final LoginService _log= LoginService();
+  final loginStore = Store<LoginState>(
+    loginReducer,
+    initialState: LoginState(uid: ''),
+  );
+  //final LoginService _log= LoginService();
   bool loading=false;
   final _regkey=GlobalKey<FormState>();
   String email="";
@@ -87,8 +99,9 @@ class _SignInState extends State<SignIn> {
                     },
                   ),
                   SizedBox(height: 20,),
-                  TextButton(onPressed: ()async{ if(_regkey.currentState!.validate()){
-                    setState(() {
+                  TextButton(onPressed: ()async{ if(_regkey.currentState!.validate())
+                  {
+                    /*setState(() {
                       loading=true;
                     });
                     dynamic result= await _log.signIn(email, password);
@@ -97,7 +110,12 @@ class _SignInState extends State<SignIn> {
                         loading= false;
                         error="Wrong email or password";
                       });
-                    }
+                    }*/
+                    loginStore.dispatch(LoginWithEmail(email:email, password:password));
+
+                    print(loginStore.state.uid.toString());
+                    print("EVO ME");
+                    Get.to(()=>Home());
                   }
                   },
                     child:Text("Sign in", style: TextStyle(color: Colors.white),),

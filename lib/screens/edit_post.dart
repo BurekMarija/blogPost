@@ -1,26 +1,49 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import "package:get/get.dart";
+import 'package:redux/redux.dart';
+import '../redux/actions.dart';
+import '../redux/appState.dart';
+import '../redux/reducer.dart';
+import '../redux/reducer.dart';
 import '../shared/constants.dart';
+import 'home/home.dart';
 
-class EditScreen extends StatelessWidget {
-  final  inputName;
+class EditScreen extends StatefulWidget {
+  late final  inputName;
   final  inputContent;
   final  inputUrl;
   final id;
-  String oldName="";
-  String newName="";
-  String newContent="";
-  String newUrl="";
+
   EditScreen (this.inputName, this.inputContent, this.inputUrl, this.id);
+
+  @override
+  State<EditScreen> createState() => _EditScreenState();
+}
+
+class _EditScreenState extends State<EditScreen> {
+  String oldName="";
+
+  String newName="";
+
+  String newContent="";
+
+  String newUrl="";
+
   @override
   Widget build(BuildContext context) {
-    oldName=inputName;
-    newName=inputName;
-    newContent=inputContent;
-    newUrl=inputUrl;
+    final store=Store<dynamic>(
+      firebaseDataReducer,
+      initialState: {},
+    );
+    oldName=widget.inputName;
+    newName=widget.inputName;
+    newContent=widget.inputContent;
+    newUrl=widget.inputUrl;
     return Scaffold(
-      appBar: AppBar(title: Text("Edit post "+ inputName)),
+      //Koja kiflica?
+      appBar: AppBar(title: Text("Edit post $oldName"),
+      ),
       body:
           Container(
             height: MediaQuery.of(context).size.height,
@@ -32,7 +55,7 @@ class EditScreen extends StatelessWidget {
                     children: [
                       Padding(padding: EdgeInsets.all(6),
                         child:TextFormField(
-                        initialValue: inputName,
+                        initialValue: widget.inputName,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -43,7 +66,7 @@ class EditScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           hintStyle: TextStyle(color: Colors.blue),
-                          hintText: inputName,
+                          hintText: widget.inputName,
                         ),//                      <--- TextField
                         onChanged: (text) {
                           newName = text;
@@ -54,7 +77,7 @@ class EditScreen extends StatelessWidget {
                       Padding(padding: EdgeInsets.all(6), child:
                       TextFormField( //
                         keyboardType: TextInputType.multiline,
-                        initialValue: inputContent,
+                        initialValue: widget.inputContent,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -65,7 +88,7 @@ class EditScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           hintStyle: TextStyle(color: Colors.blue),
-                          hintText: inputContent,
+                          hintText: widget.inputContent,
                         ),//                     <--- TextField
                         onChanged: (text) {
                           newContent= text;
@@ -75,7 +98,7 @@ class EditScreen extends StatelessWidget {
                       ),),
                       Padding(padding: EdgeInsets.all(6), child:
                       TextFormField( //
-                        initialValue: inputUrl,
+                        initialValue: widget.inputUrl,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -86,7 +109,7 @@ class EditScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                           hintStyle: TextStyle(color: Colors.blue),
-                          hintText: inputUrl,
+                          hintText: widget.inputUrl,
                         ),//                     <--- TextField
                         onChanged: (text) {
                           newUrl=text;
@@ -94,7 +117,18 @@ class EditScreen extends StatelessWidget {
                       ),),
 
                       TextButton(onPressed:()async{
-                        await editPost();
+                        //await editPost();
+                        store.dispatch(UpdateFirebasePostAction(
+                          name: newName,
+                          content: newContent,
+                          url: newUrl,
+                          id:widget.id,
+                        ));
+                        setState(() { oldName=store.dispatch(GetPostNameAction(id: widget.id)); });
+                        Get.snackbar('Post edit',
+                          'Successfully edited',);
+                        Get.to(()=>Home());
+
                       },
                           child: Text("Edit post",
                           style: TextStyle(
@@ -109,11 +143,4 @@ class EditScreen extends StatelessWidget {
 
     );
   }
-
-  Future editPost() async{
-    final post=FirebaseFirestore.instance.collection("posts").doc(id);
-      post.update({"name": newName, "content": newContent, "url": newUrl});
-
-  }
-
 }

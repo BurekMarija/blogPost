@@ -2,12 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/post.dart';
+import '../../redux/Login_redux/login_actions.dart';
+import '../../redux/Login_redux/login_state.dart';
+import '../../redux/Login_redux/reducer.dart';
 import '../../shared/constants.dart';
 import '../new_post.dart';
 import "package:blog_posts/services/database.dart";
 import "package:provider/provider.dart";
 import 'package:blog_posts/screens/home/database_posts.dart';
 import '../../services/log.dart';
+import 'package:redux/redux.dart';
+
+import '../wrapper.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -15,7 +21,8 @@ class Home extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<Home> {
-  final _log=LoginService();
+  //final _log=LoginService();
+  //varijanta sa provajderom
   List<dynamic> postsData=[];
 
   ValueNotifier<String> inputName=ValueNotifier<String>("");
@@ -24,18 +31,22 @@ class _MyWidgetState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final loginStore = Store<LoginState>(
+      loginReducer,
+      initialState: LoginState(uid: ''),
+    );
     return
-      StreamProvider<List<Post>>.value(
-        value: DatabaseService(uid: '').posts,
-        initialData: [],
-        child: Scaffold(
+        Scaffold(
         appBar: AppBar(
           title: Text("Blog post App"),
               actions: <Widget>[
                 FloatingActionButton.extended(
                   heroTag: UniqueKey(),
                   onPressed: ()async {
-                  await _log.signOut();
+                    loginStore.dispatch(Logout);
+                    Get.to(()=>Wrapper());
+                    //varijanta sa provajderom
+                 // await _log.signOut();
                 },
                   icon: Icon(Icons.logout),
                   label: Text("Logout"),
@@ -68,8 +79,8 @@ class _MyWidgetState extends State<Home> {
             ),
 
 
-    ),
-      );
+    );
+
 
   }
 
