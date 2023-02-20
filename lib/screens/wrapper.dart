@@ -12,10 +12,10 @@ import '../redux/Login_redux/login_state.dart';
 import '../redux/Login_redux/reducer.dart';
 
 class Wrapper extends StatelessWidget {
-  final store = Store<LoginState>(
+ /* final store = Store<LoginState>(
     loginReducer,
     initialState: LoginState(uid: ''),
-  );
+  );*/
   @override
   Widget build(BuildContext context) {
     return StoreConnector<LoginState, LoginState>(

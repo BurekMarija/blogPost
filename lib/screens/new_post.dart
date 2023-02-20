@@ -19,10 +19,7 @@ class NewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final store=Store<dynamic>(
-      firebaseDataReducer,
-      initialState: {},
-    );
+
     return Scaffold(
       appBar: AppBar(title: Text("New post")),
       body:
@@ -114,13 +111,14 @@ class NewScreen extends StatelessWidget {
                         ),),
                         TextButton(onPressed: (){
                           //createPost();
-                          store.dispatch(SetFirebasePostAction(
+                          StoreProvider.of(context).dispatch(SetFirebasePostAction(
                             name: controlerName.text,
                             content: controlerContent.text,
                             url: controlerUrl.text,
                           ));
                         //Samo privremeno zakomentiram za probu
-                          Get.to(()=>Home());
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => Home()));
 
                         },
                             child: Text("Unesi",

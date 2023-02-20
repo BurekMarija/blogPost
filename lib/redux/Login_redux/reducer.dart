@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:redux/redux.dart';
 import 'login_actions.dart';
 import 'login_state.dart';
 
-LoginState loginReducer(LoginState state, dynamic action) {
+
+LoginState loginReducer(LoginState state, dynamic action)   {
   final FirebaseAuth _log=FirebaseAuth.instance;
 
   if(action is LoginWithEmail){
@@ -11,7 +12,7 @@ LoginState loginReducer(LoginState state, dynamic action) {
     final password = action.password;
 
     try {
-      _log.signInWithEmailAndPassword(email: email, password: password);
+       _log.signInWithEmailAndPassword(email: email, password: password);
       return LoginState(uid: _log.currentUser?.uid);
     }catch(error){
       return LoginState(uid: null);

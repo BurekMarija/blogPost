@@ -32,7 +32,7 @@ class _MyWidgetState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final loginStore = Store<LoginState>(
-      loginReducer,
+      loginReducer as Reducer<LoginState>,
       initialState: LoginState(uid: ''),
     );
     return

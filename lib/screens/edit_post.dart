@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import "package:get/get.dart";
 import 'package:redux/redux.dart';
 import '../redux/actions.dart';
@@ -32,10 +33,6 @@ class _EditScreenState extends State<EditScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final store=Store<dynamic>(
-      firebaseDataReducer,
-      initialState: {},
-    );
     oldName=widget.inputName;
     newName=widget.inputName;
     newContent=widget.inputContent;
@@ -118,16 +115,17 @@ class _EditScreenState extends State<EditScreen> {
 
                       TextButton(onPressed:()async{
                         //await editPost();
-                        store.dispatch(UpdateFirebasePostAction(
+                        StoreProvider.of(context).dispatch(UpdateFirebasePostAction(
                           name: newName,
                           content: newContent,
                           url: newUrl,
                           id:widget.id,
                         ));
-                        setState(() { oldName=store.dispatch(GetPostNameAction(id: widget.id)); });
+                        setState(() { oldName=StoreProvider.of(context).dispatch(GetPostNameAction(id: widget.id)); });
                         Get.snackbar('Post edit',
                           'Successfully edited',);
-                        Get.to(()=>Home());
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Home()));
 
                       },
                           child: Text("Edit post",

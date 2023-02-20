@@ -12,10 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:redux/redux.dart';
 
-final loginStore = Store<LoginState>(
-  loginReducer,
-  initialState: LoginState(uid: ''),
-);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,7 +39,7 @@ class MyApp extends StatelessWidget {
       store: firebaseStore,
       child: StoreProvider<LoginState>(
         store: loginStore,
-        child: GetMaterialApp(
+        child: MaterialApp(
           title: 'Blog post',
           home: Wrapper(),
         ),

@@ -1,6 +1,7 @@
 import 'package:blog_posts/redux/Login_redux/login_actions.dart';
 import 'package:blog_posts/shared/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import '../../redux/Login_redux/login_state.dart';
 import '../../redux/Login_redux/reducer.dart';
 import '../../services/log.dart';
@@ -15,10 +16,7 @@ Register({required this.toggle});
 }
 
 class _RegisterState extends State<Register> {
-  final loginStore = Store<LoginState>(
-    loginReducer,
-    initialState: LoginState(uid: ''),
-  );
+
   //final LoginService _log= LoginService();
   bool loading=false;
   final _regkey=GlobalKey<FormState>();
@@ -103,7 +101,7 @@ class _RegisterState extends State<Register> {
                           error="Please get right email";
                         });
                       }*/
-                      var user=loginStore.dispatch(RegisterUser(email:email, password:password));
+                      StoreProvider.of<dynamic>(context).dispatch(RegisterUser(email:email, password:password));
 
                     }
                   },
