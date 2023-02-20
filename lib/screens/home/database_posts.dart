@@ -9,16 +9,6 @@ import '../../models/post.dart';
 import '../../redux/appState.dart';
 import '../../redux/reducer.dart';
 
-import 'package:blog_posts/redux/actions.dart';
-import 'package:blog_posts/screens/home/blog_card.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import "package:flutter/material.dart";
-import 'package:flutter_redux/flutter_redux.dart';
-import "package:provider/provider.dart";
-import 'package:redux/redux.dart';
-import '../../models/post.dart';
-import '../../redux/appState.dart';
-import '../../redux/reducer.dart';
 
 class DatabasePosts extends StatefulWidget {
   @override

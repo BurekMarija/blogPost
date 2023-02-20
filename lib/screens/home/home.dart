@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get/get.dart';
 import '../../models/post.dart';
 import '../../redux/Login_redux/login_actions.dart';
@@ -31,10 +32,7 @@ class _MyWidgetState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    final loginStore = Store<LoginState>(
-      loginReducer as Reducer<LoginState>,
-      initialState: LoginState(uid: ''),
-    );
+
     return
         Scaffold(
         appBar: AppBar(
@@ -42,9 +40,10 @@ class _MyWidgetState extends State<Home> {
               actions: <Widget>[
                 FloatingActionButton.extended(
                   heroTag: UniqueKey(),
-                  onPressed: ()async {
-                    loginStore.dispatch(Logout);
-                    Get.to(()=>Wrapper());
+                  onPressed: () {
+                    StoreProvider.of<LoginState>(context).dispatch(Logout(broj: 1));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Wrapper()));
                     //varijanta sa provajderom
                  // await _log.signOut();
                 },
@@ -70,7 +69,8 @@ class _MyWidgetState extends State<Home> {
                     style: TextStyle(fontSize: 20, color: Colors.white),),
                   TextButton(
                     onPressed: () {
-                      Get.to(NewScreen());
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => NewScreen()));
                     },
                     child: const Icon(Icons.add),
                   ),

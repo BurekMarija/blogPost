@@ -15,7 +15,8 @@ class LoginWithEmail{
   LoginWithEmail({ required this.email, required this.password});
 }
 class Logout{
-  Logout();
+  final int broj;
+  Logout({required this.broj});
 }
 
 class RegisterUser{

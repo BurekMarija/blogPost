@@ -101,7 +101,7 @@ class _RegisterState extends State<Register> {
                           error="Please get right email";
                         });
                       }*/
-                      StoreProvider.of<dynamic>(context).dispatch(RegisterUser(email:email, password:password));
+                      StoreProvider.of<LoginState>(context).dispatch(RegisterUser(email:email, password:password));
 
                     }
                   },

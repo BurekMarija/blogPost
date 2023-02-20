@@ -115,9 +115,9 @@ class _SignInState extends State<SignIn> {
                         error="Wrong email or password";
                       });
                     }*/
-                      StoreProvider.of<dynamic>(context).dispatch(LoginWithEmail(email:email, password:password));
+                      StoreProvider.of<LoginState>(context).dispatch(LoginWithEmail(email:email, password:password));
                       //loginStore.dispatch(LoginWithEmail(email:email, password:password));
-
+                      print(user.uid! + "ajde da i vidim kaj piše");
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) => Home()));
                     }

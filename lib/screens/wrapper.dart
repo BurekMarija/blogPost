@@ -12,20 +12,19 @@ import '../redux/Login_redux/login_state.dart';
 import '../redux/Login_redux/reducer.dart';
 
 class Wrapper extends StatelessWidget {
- /* final store = Store<LoginState>(
-    loginReducer,
-    initialState: LoginState(uid: ''),
-  );*/
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<LoginState, LoginState>(
       converter: (store) => store.state,
       builder: (BuildContext context, LoginState user) {
-        print("${user.uid} Evo kao user");
+        print(user.toString() +"Evo kao user");
 
-        if (user.uid == '') {
+        if (user.uid == '' ) {
           return Login();
-        } else {
+        } else if(user.uid==null){
+          return Login();
+        }else{
           return Home();
         }
       },
