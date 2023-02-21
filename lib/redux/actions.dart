@@ -1,27 +1,31 @@
-import '../models/post.dart';
-
-class SetFirebaseDataAction{
+class SetFirebaseDataAction {
   final dynamic data;
-  SetFirebaseDataAction(this.data, );
+  SetFirebaseDataAction(
+    this.data,
+  );
 }
 
-class SetFirebasePostAction{
+class SetFirebasePostAction {
   final String name;
   final String content;
   final String url;
-  SetFirebasePostAction({required this.name,required this.content,required this.url });
+  SetFirebasePostAction(
+      {required this.name, required this.content, required this.url});
 }
 
-class UpdateFirebasePostAction{
+class UpdateFirebasePostAction {
   final String id;
   final String name;
   final String content;
   final String url;
-  UpdateFirebasePostAction({required this.id,required this.name,required this.content,required this.url });
-
+  UpdateFirebasePostAction(
+      {required this.id,
+      required this.name,
+      required this.content,
+      required this.url});
 }
 
-class GetPostNameAction{
+class GetPostNameAction {
   final String id;
   GetPostNameAction({required this.id});
 }

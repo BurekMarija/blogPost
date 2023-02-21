@@ -1,3 +1,4 @@
+import 'package:blog_posts/redux/Login_redux/login_thunk.dart';
 import 'package:blog_posts/redux/Login_redux/reducer.dart';
 import 'package:blog_posts/screens/login/register.dart';
 import 'package:blog_posts/services/log.dart';
@@ -48,9 +49,9 @@ class _SignInState extends State<SignIn> {
       ],
       ),
       resizeToAvoidBottomInset: false,
-      body:StoreConnector<LoginState, LoginState>(
+      body: StoreConnector<LoginState, LoginState>(
     converter: (store) => store.state,
-    builder: (BuildContext context, LoginState user){
+    builder: (BuildContext context, LoginState user) {
       return
       Container(
         decoration: backgroundGradient,
@@ -115,11 +116,12 @@ class _SignInState extends State<SignIn> {
                         error="Wrong email or password";
                       });
                     }*/
-                      StoreProvider.of<LoginState>(context).dispatch(LoginWithEmail(email:email, password:password));
+                      await StoreProvider.of<LoginState>(context).dispatch(thunkLogin(email, password));
                       //loginStore.dispatch(LoginWithEmail(email:email, password:password));
-                      print(user.uid! + "ajde da i vidim kaj piše");
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                    // print("User iud je ${user.uid.toString()}");
+                      //print(user.uid! + "ajde da i vidim kaj piše");
+                      //Navigator.push(context,
+                       //   MaterialPageRoute(builder: (context) => Home()));
                     }
                     },
                       child:Text("Sign in", style: TextStyle(color: Colors.white),),

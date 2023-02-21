@@ -7,7 +7,6 @@ import 'package:blog_posts/models/user.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-
 import '../redux/Login_redux/login_state.dart';
 import '../redux/Login_redux/reducer.dart';
 
@@ -18,9 +17,8 @@ class Wrapper extends StatelessWidget {
     return StoreConnector<LoginState, LoginState>(
       converter: (store) => store.state,
       builder: (BuildContext context, LoginState user) {
-        print(user.toString() +"Evo kao user");
-
-        if (user.uid == '' ) {
+        print(user.uid.toString() +"Evo kao user");
+        if (user.uid.toString() == '' ) {
           return Login();
         } else if(user.uid==null){
           return Login();
