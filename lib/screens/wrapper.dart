@@ -1,3 +1,4 @@
+import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/screens/home/home.dart';
 import 'package:blog_posts/screens/login/login.dart';
 import 'package:blog_posts/screens/login/sign_in.dart';
@@ -11,20 +12,19 @@ import '../redux/Login_redux/login_state.dart';
 import '../redux/Login_redux/reducer.dart';
 
 class Wrapper extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<LoginState, LoginState>(
+    return StoreConnector<AllState, AllState>(
       converter: (store) => store.state,
-      builder: (BuildContext context, LoginState user) {
-        print(user.uid.toString() +"Evo kao user");
-        if (user.uid.toString() == '' ) {
-          return Login();
-        } else if(user.uid==null){
-          return Login();
-        }else{
-          return Home();
-        }
+      builder: (BuildContext context, AllState state) {
+        print(state.uid.toString() + "Evo kao user");
+        //if (state.uid.toString() == '') {
+        //  return Login();
+        //} else if (state.uid == null) {
+        // return Login();
+        //  } else {
+        return Home();
+        //   }
       },
     );
   }

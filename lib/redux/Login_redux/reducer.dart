@@ -3,7 +3,7 @@ import 'package:redux/redux.dart';
 import 'login_actions.dart';
 import 'login_state.dart';
 
-LoginState loginReducer(LoginState state, dynamic action) {
+String? loginReducer(String state, dynamic action) {
   final FirebaseAuth _log = FirebaseAuth.instance;
 
   if (action is LoginWithEmail) {
@@ -12,13 +12,13 @@ LoginState loginReducer(LoginState state, dynamic action) {
     final password = action.password;
       _log.signInWithEmailAndPassword(email: email, password: password);*/
     print(_log.currentUser?.uid.toString());
-    return LoginState(uid: _log.currentUser?.uid);
+    return _log.currentUser?.uid;
   }
 
   if (action is Logout) {
     //A bogami i ti
     // _log.signOut();
-    return LoginState(uid: "");
+    return "";
   }
 
   if (action is RegisterUser) {
@@ -27,7 +27,7 @@ LoginState loginReducer(LoginState state, dynamic action) {
     final password = action.password;
      _log.createUserWithEmailAndPassword(email: email, password: password);*/
 
-    return LoginState(uid: _log.currentUser?.uid);
+    return _log.currentUser?.uid;
   }
 
   return state;

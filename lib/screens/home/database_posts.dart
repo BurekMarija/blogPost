@@ -1,4 +1,4 @@
-import 'package:blog_posts/redux/actions.dart';
+import 'package:blog_posts/redux/data_Redux/actions.dart';
 import 'package:blog_posts/screens/home/blog_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
@@ -6,9 +6,8 @@ import 'package:flutter_redux/flutter_redux.dart';
 import "package:provider/provider.dart";
 import 'package:redux/redux.dart';
 import '../../models/post.dart';
-import '../../redux/appState.dart';
-import '../../redux/reducer.dart';
-
+import '../../redux/data_Redux/appState.dart';
+import '../../redux/data_Redux/reducer.dart';
 
 class DatabasePosts extends StatefulWidget {
   @override
@@ -27,8 +26,7 @@ class _DatabasePostsState extends State<DatabasePosts> {
           _posts = snapshot.data!.docs.map((doc) {
             return postFromDocument(doc.data() as Map<String, dynamic>);
           }).toList();
-        }
-        else if (snapshot.hasError) {
+        } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
           return CircularProgressIndicator();

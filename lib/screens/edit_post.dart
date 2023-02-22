@@ -1,10 +1,19 @@
+import 'package:blog_posts/redux/all_State.dart';
+import 'package:blog_posts/redux/data_Redux/appState.dart';
+import 'package:blog_posts/redux/data_Redux/login_thunk.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import "package:get/get.dart";
-import '../redux/actions.dart';
+import 'package:provider/provider.dart';
+import 'package:redux_thunk/redux_thunk.dart';
+import '../redux/data_Redux/actions.dart';
+import '../redux/data_Redux/reducer.dart';
+import 'package:blog_posts/redux/all_State.dart';
 import '../shared/constants.dart';
 import 'home/home.dart';
+
+import 'package:redux/redux.dart';
 
 class EditScreen extends StatefulWidget {
   late final inputName;
@@ -20,11 +29,8 @@ class EditScreen extends StatefulWidget {
 
 class _EditScreenState extends State<EditScreen> {
   String oldName = "";
-
   String newName = "";
-
   String newContent = "";
-
   String newUrl = "";
 
   @override
@@ -122,16 +128,16 @@ class _EditScreenState extends State<EditScreen> {
                   TextButton(
                       onPressed: () async {
                         //await editPost();
-                        StoreProvider.of(context)
-                            .dispatch(UpdateFirebasePostAction(
+
+                        StoreProvider.of<AllState>(context)
+                            .dispatch(thunkEditPost(
                           name: newName,
                           content: newContent,
                           url: newUrl,
                           id: widget.id,
                         ));
                         setState(() {
-                          oldName = StoreProvider.of(context)
-                              .dispatch(GetPostNameAction(id: widget.id));
+                          print("old name $oldName");
                         });
                         Get.snackbar(
                           'Post edit',

@@ -6,15 +6,15 @@ class SetFirebaseDataAction {
 }
 
 class SetFirebasePostAction {
-  final String name;
+  /* final String name;
   final String content;
   final String url;
   SetFirebasePostAction(
-      {required this.name, required this.content, required this.url});
+      {required this.name, required this.content, required this.url});*/
 }
 
 class UpdateFirebasePostAction {
-  final String id;
+  /*final String id;
   final String name;
   final String content;
   final String url;
@@ -22,10 +22,5 @@ class UpdateFirebasePostAction {
       {required this.id,
       required this.name,
       required this.content,
-      required this.url});
-}
-
-class GetPostNameAction {
-  final String id;
-  GetPostNameAction({required this.id});
+      required this.url});*/
 }

@@ -1,8 +1,15 @@
-import 'package:blog_posts/redux/actions.dart';
+import 'package:blog_posts/models/post.dart';
+import 'package:blog_posts/redux/data_Redux/actions.dart';
+import 'package:blog_posts/redux/data_Redux/appState.dart';
 import 'package:blog_posts/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:provider/provider.dart';
 import 'package:redux/redux.dart';
+import 'package:redux_thunk/redux_thunk.dart';
+import '../redux/all_State.dart';
+import '../redux/data_Redux/login_thunk.dart';
+import '../redux/data_Redux/reducer.dart';
 import '../shared/constants.dart';
 
 class NewScreen extends StatelessWidget {
@@ -114,13 +121,13 @@ class NewScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         //createPost();
-                        StoreProvider.of(context)
-                            .dispatch(SetFirebasePostAction(
+
+                        StoreProvider.of<AllState>(context, listen: false)
+                            .dispatch(thunkNewPost(
                           name: controlerName.text,
                           content: controlerContent.text,
                           url: controlerUrl.text,
                         ));
-                        //Samo privremeno zakomentiram za probu
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Home()));
                       },
@@ -136,19 +143,4 @@ class NewScreen extends StatelessWidget {
           ),
         ));
   }
-
-/*
-  Future createPost() async{
-    final docPosts=FirebaseFirestore.instance.collection("posts").doc();
-
-    final json= {
-      "id": docPosts.id,
-      "name": controlerName.text,
-      "content": controlerContent.text,
-      "url": controlerUrl.text,
-    };
-    //Stvori taj post u firebase
-    await docPosts.set(json);
-    Get.to(Home());
-  }*/
 }
