@@ -1,8 +1,6 @@
-import 'package:blog_posts/redux/Login_redux/login_state.dart';
 import 'package:blog_posts/redux/Login_redux/reducer.dart';
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/redux/all_reducer.dart';
-import 'package:blog_posts/redux/data_Redux/appState.dart';
 import 'package:blog_posts/redux/data_Redux/reducer.dart';
 import 'package:blog_posts/screens/wrapper.dart';
 import 'package:flutter_redux/flutter_redux.dart';

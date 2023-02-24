@@ -1,6 +1,6 @@
+import 'package:blog_posts/redux/all_State.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../redux/Login_redux/login_state.dart';
 import '../../redux/Login_redux/login_thunk.dart';
 import '../../shared/constants.dart';
 import '../new_post.dart';
@@ -30,7 +30,7 @@ class _MyWidgetState extends State<Home> {
           FloatingActionButton.extended(
             heroTag: UniqueKey(),
             onPressed: () {
-              StoreProvider.of<LoginState>(context).dispatch(thunkLogout());
+              StoreProvider.of<AllState>(context).dispatch(thunkLogout());
               Navigator.push(
                   context, MaterialPageRoute(builder: (context) => Wrapper()));
               //varijanta sa provajderom

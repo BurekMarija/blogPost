@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:redux/redux.dart';
 import 'login_actions.dart';
-import 'login_state.dart';
 
 String? loginReducer(String state, dynamic action) {
   final FirebaseAuth _log = FirebaseAuth.instance;

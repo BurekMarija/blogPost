@@ -6,7 +6,7 @@ class SetFirebaseDataAction {
 }
 
 class SetFirebasePostAction {
-  /* final String name;
+  /*final String name;
   final String content;
   final String url;
   SetFirebasePostAction(

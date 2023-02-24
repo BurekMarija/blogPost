@@ -8,7 +8,6 @@ import 'package:blog_posts/models/user.dart';
 import 'package:redux/redux.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
-import '../redux/Login_redux/login_state.dart';
 import '../redux/Login_redux/reducer.dart';
 
 class Wrapper extends StatelessWidget {
@@ -18,13 +17,13 @@ class Wrapper extends StatelessWidget {
       converter: (store) => store.state,
       builder: (BuildContext context, AllState state) {
         print(state.uid.toString() + "Evo kao user");
-        //if (state.uid.toString() == '') {
-        //  return Login();
-        //} else if (state.uid == null) {
-        // return Login();
-        //  } else {
-        return Home();
-        //   }
+        if (state.uid.toString() == '') {
+          return Login();
+        } else if (state.uid == null) {
+          return Login();
+        } else {
+          return Home();
+        }
       },
     );
   }

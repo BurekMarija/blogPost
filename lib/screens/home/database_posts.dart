@@ -6,7 +6,6 @@ import 'package:flutter_redux/flutter_redux.dart';
 import "package:provider/provider.dart";
 import 'package:redux/redux.dart';
 import '../../models/post.dart';
-import '../../redux/data_Redux/appState.dart';
 import '../../redux/data_Redux/reducer.dart';
 
 class DatabasePosts extends StatefulWidget {

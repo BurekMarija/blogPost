@@ -8,9 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BlogCard extends StatelessWidget {
   final Post post;
-  //final VoidCallback delete;
-  //final VoidCallback edit;
-  BlogCard({required this.post});
+  const BlogCard({super.key, required this.post});
   @override
   Widget build(BuildContext context) {
     var diff = post.id;
@@ -59,9 +57,13 @@ class BlogCard extends StatelessWidget {
                 child: FloatingActionButton.small(
                   heroTag: UniqueKey(),
                   onPressed: () {
-                    Get.to(() =>
-                        EditScreen(post.name, post.content, post.url, post.id));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditScreen(
+                                post.name, post.content, post.url, post.id)));
                   },
+
                   //edit,
                   child: const Icon(Icons.edit),
                 ),

@@ -1,15 +1,9 @@
 import 'package:blog_posts/redux/all_State.dart';
-import 'package:blog_posts/redux/data_Redux/appState.dart';
-import 'package:blog_posts/redux/data_Redux/login_thunk.dart';
+import 'package:blog_posts/redux/data_Redux/data_thunk.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import "package:get/get.dart";
-import 'package:provider/provider.dart';
-import 'package:redux_thunk/redux_thunk.dart';
-import '../redux/data_Redux/actions.dart';
-import '../redux/data_Redux/reducer.dart';
-import 'package:blog_posts/redux/all_State.dart';
 import '../shared/constants.dart';
 import 'home/home.dart';
 
@@ -129,16 +123,16 @@ class _EditScreenState extends State<EditScreen> {
                       onPressed: () async {
                         //await editPost();
 
-                        StoreProvider.of<AllState>(context)
+                        StoreProvider.of<AllState>(context, listen: false)
                             .dispatch(thunkEditPost(
                           name: newName,
                           content: newContent,
                           url: newUrl,
                           id: widget.id,
                         ));
-                        setState(() {
-                          print("old name $oldName");
-                        });
+                        //  setState(() {
+                        //   print("old name $oldName");
+                        // });
                         Get.snackbar(
                           'Post edit',
                           'Successfully edited',

@@ -1,16 +1,13 @@
 import 'package:blog_posts/redux/data_Redux/actions.dart';
-import 'package:blog_posts/redux/data_Redux/appState.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:redux_thunk/redux_thunk.dart';
 
 import '../../models/post.dart';
 
 List<Post> postReducer(List<Post> posts, dynamic action) {
-  /*if (action is SetFirebaseDataAction) {
-    // Convert each document to a Post object
-    List<Post> posts =
-        action.data.map((document) => postFromDocument(document)).toList();
+  if (action is SetFirebaseDataAction) {
     return posts;
-  }*/
+  }
 
   if (action is SetFirebasePostAction) {
     /* final docPosts = FirebaseFirestore.instance.collection("posts").doc();

@@ -1,8 +1,8 @@
 import 'package:blog_posts/redux/Login_redux/login_thunk.dart';
+import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import '../../redux/Login_redux/login_state.dart';
 import '../../shared/constants.dart';
 
 class Register extends StatefulWidget {
@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                           error="Please get right email";
                         });
                       }*/
-                              StoreProvider.of<LoginState>(context)
+                              StoreProvider.of<AllState>(context)
                                   .dispatch(thunkRegister(email, password));
                             }
                           },
