@@ -6,7 +6,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import "package:provider/provider.dart";
 import 'package:redux/redux.dart';
 import '../../models/post.dart';
-import '../../redux/data_Redux/reducer.dart';
+import '../../redux/all_State.dart';
 
 class DatabasePosts extends StatefulWidget {
   @override
@@ -15,9 +15,11 @@ class DatabasePosts extends StatefulWidget {
 
 class _DatabasePostsState extends State<DatabasePosts> {
   List<Post> _posts = [];
+  bool _initial = false;
 
   @override
   Widget build(BuildContext context) {
+    //_posts=StoreProvider.of<AllState>(context).dispatch(thunkGetPosts());
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('posts').snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -30,6 +32,14 @@ class _DatabasePostsState extends State<DatabasePosts> {
         } else {
           return CircularProgressIndicator();
         }
+
+        //Setam stanje na početku
+        if (_initial == false && _posts.isNotEmpty) {
+          StoreProvider.of<AllState>(context)
+              .dispatch(GetFirebaseDataAction(_posts));
+          _initial = true;
+        }
+
         return Container(
           child: ListView.builder(
             shrinkWrap: true,

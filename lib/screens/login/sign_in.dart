@@ -10,8 +10,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:redux/redux.dart';
 
 import '../../main.dart';
+import '../../models/post.dart';
 import '../../models/user.dart';
 import '../../redux/Login_redux/login_actions.dart';
+import '../../redux/data_Redux/data_thunk.dart';
 import '../../shared/constants.dart';
 import '../home/home.dart';
 
@@ -110,23 +112,8 @@ class _SignInState extends State<SignIn> {
                           TextButton(
                             onPressed: () async {
                               if (_regkey.currentState!.validate()) {
-                                /*setState(() {
-                      loading=true;
-                    });
-                    dynamic result= await _log.signIn(email, password);
-                    if(result== null){
-                      setState(() {
-                        loading= false;
-                        error="Wrong email or password";
-                      });
-                    }*/
                                 await StoreProvider.of<AllState>(context)
                                     .dispatch(thunkLogin(email, password));
-                                //loginStore.dispatch(LoginWithEmail(email:email, password:password));
-                                // print("User iud je ${user.uid.toString()}");
-                                //print(user.uid! + "ajde da i vidim kaj piše");
-                                //Navigator.push(context,
-                                //   MaterialPageRoute(builder: (context) => Home()));
                               }
                             },
                             child: Text(

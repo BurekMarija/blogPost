@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'package:blog_posts/redux/data_Redux/actions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -5,30 +6,31 @@ import 'package:redux_thunk/redux_thunk.dart';
 import '../../models/post.dart';
 
 List<Post> postReducer(List<Post> posts, dynamic action) {
-  if (action is SetFirebaseDataAction) {
-    return posts;
+  if (action is GetFirebaseDataAction) {
+    print(posts.length);
+    return action.posts;
   }
 
   if (action is SetFirebasePostAction) {
-    /* final docPosts = FirebaseFirestore.instance.collection("posts").doc();
-
-    final json = {
-      "id": docPosts.id,
-      "name": action.name,
-      "content": action.content,
-      "url": action.url,
-    };
-    //Stvori taj post u firebase
-    docPosts.set(json);*/
-    return posts;
+    List<Post> newPosts = posts;
+    newPosts.add(action.post);
+    return newPosts;
   }
 
   if (action is UpdateFirebasePostAction) {
-    /* print("usao u edit act");
-    final post = FirebaseFirestore.instance.collection("posts").doc(action.id);
-    post.update(
-        {"name": action.name, "content": action.content, "url": action.url});*/
-    return posts;
+    List<Post> newPosts = posts.map((post) {
+      if (post.id == action.post.id) {
+        return Post(
+          id: post.id,
+          name: action.post.name,
+          content: action.post.content,
+          url: action.post.url,
+        );
+      } else {
+        return post;
+      }
+    }).toList();
+    return newPosts;
   }
 
   return posts;

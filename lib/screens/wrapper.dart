@@ -16,7 +16,6 @@ class Wrapper extends StatelessWidget {
     return StoreConnector<AllState, AllState>(
       converter: (store) => store.state,
       builder: (BuildContext context, AllState state) {
-        print(state.uid.toString() + "Evo kao user");
         if (state.uid.toString() == '') {
           return Login();
         } else if (state.uid == null) {
