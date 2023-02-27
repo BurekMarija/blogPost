@@ -1,13 +1,10 @@
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/redux/data_Redux/data_thunk.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import "package:get/get.dart";
 import '../shared/constants.dart';
 import 'home/home.dart';
-
-import 'package:redux/redux.dart';
 
 class EditScreen extends StatefulWidget {
   late final inputName;
@@ -121,8 +118,6 @@ class _EditScreenState extends State<EditScreen> {
                   ),
                   TextButton(
                       onPressed: () async {
-                        //await editPost();
-
                         StoreProvider.of<AllState>(context, listen: false)
                             .dispatch(thunkEditPost(
                           name: newName,
@@ -133,10 +128,6 @@ class _EditScreenState extends State<EditScreen> {
                         //  setState(() {
                         //   print("old name $oldName");
                         // });
-                        Get.snackbar(
-                          'Post edit',
-                          'Successfully edited',
-                        );
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => Home()));
                       },

@@ -1,4 +1,4 @@
-import 'package:blog_posts/redux/Login_redux/reducer.dart';
+import 'package:blog_posts/redux/Login_redux/login_reducer.dart';
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/redux/all_reducer.dart';
 import 'package:blog_posts/redux/data_Redux/reducer.dart';
@@ -17,21 +17,15 @@ void main() async {
   await Firebase.initializeApp();
 
   runApp(GetMaterialApp(
-    // You need to change Material App to GetMaterialApp
     home: MyApp(),
   ));
 }
-/* final firebaseStore = Store<dynamic>(
-    firebaseDataReducer,
-    middleware: [thunkMiddleware],
-    initialState: {},
-  );*/
 
 class MyApp extends StatelessWidget {
   final AllStore = Store<AllState>(
     allStateReducer,
     middleware: [thunkMiddleware],
-    initialState: AllState(uid: "", posts: <Post>[]),
+    initialState: AllState(uid: "", posts: [], favoritePosts: []),
   );
 
   @override

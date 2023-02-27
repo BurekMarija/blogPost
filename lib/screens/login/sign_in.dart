@@ -1,5 +1,5 @@
 import 'package:blog_posts/redux/Login_redux/login_thunk.dart';
-import 'package:blog_posts/redux/Login_redux/reducer.dart';
+import 'package:blog_posts/redux/Login_redux/login_reducer.dart';
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/screens/login/register.dart';
 import 'package:blog_posts/shared/loading.dart';
@@ -14,6 +14,7 @@ import '../../models/post.dart';
 import '../../models/user.dart';
 import '../../redux/Login_redux/login_actions.dart';
 import '../../redux/data_Redux/data_thunk.dart';
+import '../../redux/favorite_redux/favorite_thunk.dart';
 import '../../shared/constants.dart';
 import '../home/home.dart';
 
@@ -27,7 +28,6 @@ class SignIn extends StatefulWidget {
 
 //Ulogiravanje anonimno
 class _SignInState extends State<SignIn> {
-  //final LoginService _log= LoginService();
   bool loading = false;
   final _regkey = GlobalKey<FormState>();
   String email = "";
@@ -111,10 +111,16 @@ class _SignInState extends State<SignIn> {
                           ),
                           TextButton(
                             onPressed: () async {
+                              loading = true;
                               if (_regkey.currentState!.validate()) {
+                                loading = true;
                                 await StoreProvider.of<AllState>(context)
                                     .dispatch(thunkLogin(email, password));
+
+                                await StoreProvider.of<AllState>(context)
+                                    .dispatch(thunkGetFavorite());
                               }
+                              loading = false;
                             },
                             child: Text(
                               "Sign in",

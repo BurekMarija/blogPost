@@ -1,8 +1,12 @@
+import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/screens/edit_post.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import '../../models/post.dart';
+import '../../redux/favorite_redux/favorite_thunk.dart';
 import '../details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -11,20 +15,25 @@ class BlogCard extends StatelessWidget {
   const BlogCard({super.key, required this.post});
   @override
   Widget build(BuildContext context) {
-    var diff = post.id;
+    var liked = StoreProvider.of<AllState>(context).state.favoritePosts;
+    bool isLiked = false;
+    for (var i = 0; i < liked.length; i++) {
+      if (post.id == liked[i].id) {
+        isLiked = true;
+        break;
+      }
+    }
     return Card(
-        color: Colors.white.withOpacity(0),
+        elevation: 0,
+        color: Colors.transparent,
         margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: Container(
           decoration: BoxDecoration(color: Colors.white.withOpacity(0.7)),
           padding: const EdgeInsets.all(12.0),
           child: Row(
             children: <Widget>[
-              //Image.network(post.url.toString(),
-              // width: 100,
-              //height: 100,),
               Padding(
-                padding: EdgeInsets.only(left: 5),
+                padding: EdgeInsets.only(left: 2),
                 child: Column(
                   children: <Widget>[
                     Padding(
@@ -42,7 +51,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 5),
                 child: FloatingActionButton.small(
                   heroTag: UniqueKey(),
                   onPressed: () async {
@@ -53,7 +62,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 5),
                 child: FloatingActionButton.small(
                   heroTag: UniqueKey(),
                   onPressed: () {
@@ -69,7 +78,7 @@ class BlogCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.only(left: 5),
                 child: FloatingActionButton.small(
                   heroTag: UniqueKey(),
                   onPressed: () {
@@ -77,6 +86,21 @@ class BlogCard extends StatelessWidget {
                         () => PostDetails(post.name, post.content, post.url));
                   },
                   child: const Icon(Icons.info),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 5),
+                child: FavoriteButton(
+                  isFavorite: isLiked,
+                  valueChanged: (_isFavorite) {
+                    StoreProvider.of<AllState>(context).dispatch(thunkFavorite(
+                        Post(
+                            name: post.name,
+                            content: post.content,
+                            url: post.url,
+                            id: post.id),
+                        _isFavorite));
+                  },
                 ),
               ),
             ],

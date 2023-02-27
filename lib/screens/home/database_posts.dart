@@ -1,5 +1,6 @@
 import 'package:blog_posts/redux/data_Redux/actions.dart';
 import 'package:blog_posts/screens/home/blog_card.dart';
+import 'package:blog_posts/shared/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_redux/flutter_redux.dart';
@@ -16,6 +17,7 @@ class DatabasePosts extends StatefulWidget {
 class _DatabasePostsState extends State<DatabasePosts> {
   List<Post> _posts = [];
   bool _initial = false;
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -35,20 +37,25 @@ class _DatabasePostsState extends State<DatabasePosts> {
 
         //Setam stanje na početku
         if (_initial == false && _posts.isNotEmpty) {
+          loading = true;
+
           StoreProvider.of<AllState>(context)
               .dispatch(GetFirebaseDataAction(_posts));
+          loading = false;
           _initial = true;
         }
 
-        return Container(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: _posts.length,
-            itemBuilder: (context, index) {
-              return BlogCard(post: _posts[index]);
-            },
-          ),
-        );
+        return loading
+            ? Loading()
+            : Container(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: _posts.length,
+                  itemBuilder: (context, index) {
+                    return BlogCard(post: _posts[index]);
+                  },
+                ),
+              );
       },
     );
   }

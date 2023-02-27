@@ -1,8 +1,10 @@
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../redux/Login_redux/login_thunk.dart';
 import '../../shared/constants.dart';
+import '../favorites/favotites_post.dart';
 import '../new_post.dart';
 import 'package:blog_posts/screens/home/database_posts.dart';
 import '../wrapper.dart';
@@ -31,10 +33,8 @@ class _MyWidgetState extends State<Home> {
             heroTag: UniqueKey(),
             onPressed: () {
               StoreProvider.of<AllState>(context).dispatch(thunkLogout());
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Wrapper()));
-              //varijanta sa provajderom
-              // await _log.signOut();
+              //Navigator.push(
+              //   context, MaterialPageRoute(builder: (context) => Wrapper()));
             },
             icon: Icon(Icons.logout),
             label: Text("Logout"),
@@ -69,7 +69,18 @@ class _MyWidgetState extends State<Home> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => NewScreen()));
                 },
-                child: const Icon(Icons.add),
+                child: const Icon(Icons.add_circle),
+              ),
+              Text(
+                "Go to favorites",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FavoritePosts()));
+                },
+                child: const Icon(Icons.heart_broken),
               ),
             ],
           ),

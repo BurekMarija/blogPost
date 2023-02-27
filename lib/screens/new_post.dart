@@ -3,6 +3,8 @@ import 'package:blog_posts/redux/data_Redux/actions.dart';
 import 'package:blog_posts/screens/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:provider/provider.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
