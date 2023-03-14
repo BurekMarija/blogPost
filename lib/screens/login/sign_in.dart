@@ -1,22 +1,10 @@
 import 'package:blog_posts/redux/Login_redux/login_thunk.dart';
-import 'package:blog_posts/redux/Login_redux/login_reducer.dart';
 import 'package:blog_posts/redux/all_State.dart';
-import 'package:blog_posts/screens/login/register.dart';
 import 'package:blog_posts/shared/loading.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:redux/redux.dart';
-
-import '../../main.dart';
-import '../../models/post.dart';
-import '../../models/user.dart';
-import '../../redux/Login_redux/login_actions.dart';
-import '../../redux/data_Redux/data_thunk.dart';
 import '../../redux/favorite_redux/favorite_thunk.dart';
 import '../../shared/constants.dart';
-import '../home/home.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggle;
@@ -60,7 +48,7 @@ class _SignInState extends State<SignIn> {
                   child: Container(
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        color: Colors.white.withOpacity(0.7)),
+                        color: Colors.white.withOpacity(0.5)),
                     margin: EdgeInsets.fromLTRB(20, 50, 20, 180),
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                     child: Form(

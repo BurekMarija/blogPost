@@ -1,8 +1,7 @@
-import 'package:blog_posts/redux/Login_redux/login_reducer.dart';
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/redux/all_reducer.dart';
-import 'package:blog_posts/redux/data_Redux/reducer.dart';
 import 'package:blog_posts/screens/wrapper.dart';
+import 'package:blog_posts/screens/animation.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:get/get.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -34,7 +33,8 @@ class MyApp extends StatelessWidget {
         store: AllStore,
         child: MaterialApp(
           title: 'Blog post',
-          home: Wrapper(),
+          home: AnimationScreen(),
+          //Wrapper(),
         ));
   }
 }

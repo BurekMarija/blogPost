@@ -7,12 +7,12 @@ List<Post> favoriteReducer(List<Post> favoritePosts, dynamic action) {
     print(favoritePosts.toString() + "add to favorites");
     return action.posts;
   }
-  if (action is ReturnFavorites) {
+  /*if (action is ReturnFavorites) {
     List<Post> newList = favoritePosts;
     print(favoritePosts.toString() + "return favorits");
     //return newList.isNotEmpty ? newList : [];
     return [];
-  }
+  }*/
   if (action is GetFavorites) {
     List<Post> newList = favoritePosts;
     return newList.isNotEmpty ? newList : [];

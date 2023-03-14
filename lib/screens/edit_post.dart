@@ -2,7 +2,6 @@ import 'package:blog_posts/redux/all_State.dart';
 import 'package:blog_posts/redux/data_Redux/data_thunk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import "package:get/get.dart";
 import '../shared/constants.dart';
 import 'home/home.dart';
 

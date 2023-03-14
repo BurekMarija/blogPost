@@ -28,8 +28,8 @@ class BlogCard extends StatelessWidget {
         color: Colors.transparent,
         margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: Container(
-          decoration: BoxDecoration(color: Colors.white.withOpacity(0.7)),
-          padding: const EdgeInsets.all(12.0),
+          decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
+          padding: const EdgeInsets.all(10.0),
           child: Row(
             children: <Widget>[
               Padding(
@@ -39,7 +39,7 @@ class BlogCard extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(5),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.3,
+                        width: MediaQuery.of(context).size.width * 0.28,
                         child: Text(
                           post.name.toString(),
                           textAlign: TextAlign.center,

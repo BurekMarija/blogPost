@@ -4,8 +4,6 @@ import 'package:blog_posts/shared/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
 import 'package:flutter_redux/flutter_redux.dart';
-import "package:provider/provider.dart";
-import 'package:redux/redux.dart';
 import '../../models/post.dart';
 import '../../redux/all_State.dart';
 
@@ -21,10 +19,10 @@ class _DatabasePostsState extends State<DatabasePosts> {
 
   @override
   Widget build(BuildContext context) {
-    //_posts=StoreProvider.of<AllState>(context).dispatch(thunkGetPosts());
+    //_posts = StoreProvider.of<AllState>(context).state.posts;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('posts').snapshots(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      builder: (BuildContext context, snapshot) {
         if (snapshot.hasData) {
           _posts = snapshot.data!.docs.map((doc) {
             return postFromDocument(doc.data() as Map<String, dynamic>);
@@ -32,7 +30,7 @@ class _DatabasePostsState extends State<DatabasePosts> {
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else {
-          return CircularProgressIndicator();
+          return Loading();
         }
 
         //Setam stanje na početku

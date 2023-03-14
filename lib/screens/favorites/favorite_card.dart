@@ -16,14 +16,14 @@ class FavoriteCard extends StatelessWidget {
         color: Colors.transparent,
         margin: const EdgeInsets.fromLTRB(10, 5, 10, 5),
         child: Container(
-            decoration: BoxDecoration(color: Colors.white.withOpacity(0.7)),
+            decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
             padding: const EdgeInsets.all(12.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
                     child: Padding(
-                      padding: EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(5),
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.3,
                         child: Text(

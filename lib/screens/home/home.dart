@@ -1,13 +1,11 @@
 import 'package:blog_posts/redux/all_State.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../redux/Login_redux/login_thunk.dart';
 import '../../shared/constants.dart';
-import '../favorites/favotites_post.dart';
+import '../favorites/favorites_post.dart';
 import '../new_post.dart';
 import 'package:blog_posts/screens/home/database_posts.dart';
-import '../wrapper.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -27,7 +25,7 @@ class _MyWidgetState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Blog post App"),
+        title: const Text("Blog post App"),
         actions: <Widget>[
           FloatingActionButton.extended(
             heroTag: UniqueKey(),
@@ -36,31 +34,32 @@ class _MyWidgetState extends State<Home> {
               //Navigator.push(
               //   context, MaterialPageRoute(builder: (context) => Wrapper()));
             },
-            icon: Icon(Icons.logout),
-            label: Text("Logout"),
+            icon: const Icon(Icons.logout),
+            label: const Text("Logout"),
             backgroundColor: Colors.blue[600],
           ),
         ],
       ),
       body: Container(
+        width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: backgroundGradient,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               SingleChildScrollView(
                 child: DatabasePosts(),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 20),
               ),
-              Text(
+              const Text(
                 "Add new post",
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
@@ -71,14 +70,14 @@ class _MyWidgetState extends State<Home> {
                 },
                 child: const Icon(Icons.add_circle),
               ),
-              Text(
+              const Text(
                 "Go to favorites",
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => FavoritePosts()));
+                      MaterialPageRoute(builder: (context) => const FavoritePosts()));
                 },
                 child: const Icon(Icons.heart_broken),
               ),
